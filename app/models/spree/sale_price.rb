@@ -9,7 +9,7 @@ module Spree
 
     validates :calculator, :presence => true
 
-    scope :active, -> { where(enabled: true).where('start_at <= ? OR start_at IS NULL AND end_at >= ? OR end_at IS NULL', Time.now, Time.now) }
+    scope :active, -> { where(enabled: true).where('(start_at <= ? OR start_at IS NULL) AND (end_at >= ? OR end_at IS NULL)', Time.now, Time.now) }
 
     # TODO make this work or remove it
     #def self.calculators
@@ -18,11 +18,6 @@ module Spree
 
     def calculator_type
       calculator.class.to_s if calculator
-    end
-
-    def calculator_type=(calculator_type)
-      clazz = calculator_type.constantize if calculator_type
-      self.calculator = clazz.new if clazz and not self.calculator.is_a? clazz
     end
 
     def price
@@ -46,6 +41,11 @@ module Spree
 
     def stop
       update_attributes({ end_at: Time.now, enabled: false })
+    end
+
+    # Convenience method for displaying the price of a given sale_price in the table
+    def display_price
+      Spree::Money.new(value, {currency: Spree::Config[:currency]})
     end
   end
 end

@@ -1,10 +1,12 @@
 Spree::Variant.class_eval do
 
+  has_many :sale_prices, through: :prices
+
   delegate_belongs_to :default_price, :sale_price, :original_price, :on_sale?
 
-  # TODO also accept a class reference for calculator type instead of only a string
-  def put_on_sale(value, calculator_type = "Spree::Calculator::DollarAmountSalePriceCalculator", all_currencies = true, start_at = Time.now, end_at = nil, enabled = true)
-    run_on_prices(all_currencies) { |p| p.put_on_sale value, calculator_type, start_at, end_at, enabled }
+  def put_on_sale value, params={}
+    all_currencies = params[:all_variants] || true    
+    run_on_prices(all_currencies) { |p| p.put_on_sale value, params }
   end
   alias :create_sale :put_on_sale
 

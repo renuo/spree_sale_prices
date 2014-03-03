@@ -1,5 +1,7 @@
 Spree::Product.class_eval do
 
+  has_many :sale_prices, through: :prices
+
   # Essentially all read values here are delegated to reading the value on the Master variant
   # All write values will write to all variants (including the Master) unless that method's all_variants parameter is set to false, in which case it will only write to the Master variant
 
@@ -10,8 +12,10 @@ Spree::Product.class_eval do
   
 
   # TODO also accept a class reference for calculator type instead of only a string
-  def put_on_sale(value, calculator_type = "Spree::Calculator::DollarAmountSalePriceCalculator", all_variants = true, start_at = Time.now, end_at = nil, enabled = true)
-    run_on_variants(all_variants) { |v| v.put_on_sale(value, calculator_type, true, start_at, end_at, enabled) }
+  def put_on_sale value, params={}
+    all_variants = params[:all_variants] || true
+
+    run_on_variants(all_variants) { |v| v.put_on_sale(value, params) }
   end
   alias :create_sale :put_on_sale
 
