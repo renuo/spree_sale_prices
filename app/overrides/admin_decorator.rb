@@ -5,7 +5,9 @@ Deface::Override.new(virtual_path: "spree/admin/shared/_product_tabs",
                      disabled: false)
 
 Deface::Override.new(virtual_path: "spree/admin/products/_form",
-                     name: "sale_price_details",
-                     insert_top: "[data-hook='admin_product_form_right']",
-                     text: "<%= ('On sale from ' + display_original_price(@product)) if @product.on_sale? %>",
+                     name: "sale_price_input",
+                     replace: "[data-hook='admin_product_form_right']",
+                     partial: "spree/admin/products/form_right",
                      disabled: false)
+
+
