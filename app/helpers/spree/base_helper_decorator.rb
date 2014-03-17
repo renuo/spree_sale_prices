@@ -1,5 +1,6 @@
 Spree::BaseHelper.class_eval do
   def display_original_price(product_or_variant)
+    current_currency = current_currency || Spree::Config[:currency]
     product_or_variant.original_price_in(current_currency).display_price.to_html
   end
   
@@ -13,5 +14,10 @@ Spree::BaseHelper.class_eval do
     else
       return ""
     end 
+  end
+
+  # Check if a sale is the current sale for a product, returns true or false
+  def active_for_sale_price product, sale_price
+    product.current_sale_in(Spree::Config[:currency]) == sale_price
   end
 end

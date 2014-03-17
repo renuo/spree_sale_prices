@@ -1,15 +1,18 @@
 Spree::Price.class_eval do
+
   has_many :sale_prices
   
-  # TODO also accept a class reference for calculator type instead of only a string
-  def put_on_sale(value, calculator_type = "Spree::Calculator::DollarAmountSalePriceCalculator", start_at = Time.now, end_at = nil, enabled = true)
-    new_sale(value, calculator_type, start_at, end_at, enabled).save
+  def put_on_sale value, params={}
+    new_sale(value, params).save
   end
-  alias :create_sale :put_on_sale
-  
-  def new_sale(value, calculator_type = "Spree::Calculator::DollarAmountSalePriceCalculator", start_at = Time.now, end_at = nil, enabled = true)
-    sale_price = sale_prices.new({ value: value, start_at: start_at, end_at: end_at, enabled: enabled })
-    sale_price.calculator_type = calculator_type
+
+  def new_sale value, params={}
+    calculator_type = params[:calculator_type] || Spree::Calculator::DollarAmountSalePriceCalculator.new
+    start_at = params[:start_at] || Time.now
+    end_at = params[:end_at] || nil
+    enabled = params[:enabled] || true
+
+    sale_price = sale_prices.new({ value: value, start_at: start_at, end_at: end_at, enabled: enabled, calculator: calculator_type })
     sale_price
   end
   
