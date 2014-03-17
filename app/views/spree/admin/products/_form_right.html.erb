@@ -4,7 +4,7 @@
     <%= f.text_field :price, :value => number_to_currency(@product.original_price, :unit => '') %>
     <%= f.error_message_on :price %>
     <% if @product.on_sale? %>
-      <strong><%= "(On sale form #{@product.display_price})" %></strong>
+      <strong><%= "(On sale for #{@product.display_price})" %></strong>
     <% end %>
   <% end %>
   <div class="alpha two columns">
