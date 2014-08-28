@@ -21,7 +21,7 @@ In your Gemfile add the following for the latest released version:
 
 _OR_ to work from master:
 
-    gem 'spree_sale_pricing', :git => 'git://github.com/jonathandean/spree-sale-pricing.git'
+    gem 'spree_sale_pricing', :git => 'git://github.com/jpstokes/spree-sale-pricing.git'
 
 Install the Gem:
 
