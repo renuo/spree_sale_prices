@@ -25,12 +25,11 @@ module Spree
         respond_with(@sale_price)
       end
 
-
       private
 
         # Load the product as a before filter. Redirect to the referer if no product is found
         def load_product
-          @product = Spree::Product.find_by_permalink(params[:product_id])
+          @product = Spree::Product.find_by(slug: params[:product_id])
           redirect_to request.referer unless @product.present?
         end
 
