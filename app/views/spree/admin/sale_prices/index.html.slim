@@ -1,0 +1,30 @@
+= render :partial => 'spree/admin/shared/product_sub_menu'
+= render :partial => 'spree/admin/shared/product_tabs', :locals => {:current => "Product Sale Prices"}
+
+= csrf_meta_tag
+
+#add-line-item
+  fieldset
+    legend align="center" = Spree.t('add_product_sale_prices')
+
+    = form_for [:admin, @product, Spree::SalePrice.new], remote: true do |f|
+      .row
+        .columns.three
+          = label_tag 'Original Price'
+          = text_field_tag '', @product.original_price.to_f, disabled: true
+      .row
+        .columns.three
+          = f.label :value, "Sale Price Amount"
+          = f.text_field :value
+        .columns.three
+          = f.label :start_at
+          = f.text_field :start_at, class: "datepicker"
+        .columns.three
+          = f.label :end_at
+          = f.text_field :end_at, class: "datepicker"
+        .columns.two
+          = f.label :submit, style: 'visibility: hidden;'
+          = f.submit "Add Sale Price"
+
+#product-sale-prices-table
+  = render partial: "table", locals: { product: @product }

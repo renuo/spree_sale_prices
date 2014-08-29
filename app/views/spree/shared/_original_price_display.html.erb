@@ -1,0 +1,14 @@
+<span class="list-price">
+  <span class="line-through">
+    <strong><%= "$#{product.original_price}" %></strong>
+  </span>
+</span>
+<span class="sale-price">
+  <span class="price selling" itemprop="price">
+    <strong><%= "#{display_price(product)}" %></strong>
+  </span>
+</span>
+
+<span class="save-percent">
+  Save <%= discount_percentage(product) %>
+</span>
