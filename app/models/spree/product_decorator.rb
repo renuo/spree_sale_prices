@@ -6,7 +6,7 @@ Spree::Product.class_eval do
   # All write values will write to all variants (including the Master) unless that method's all_variants parameter is set to false, in which case it will only write to the Master variant
 
   delegate_belongs_to :master, :active_sale_in, :current_sale_in, :next_active_sale_in, :next_current_sale_in,
-                      :sale_price_in, :on_sale_in?, :original_price_in, :discount_percent_in, :sale_price,
+                      :sale_price_in, :on_sale_in?, :original_price_in, :discount_percent_in, :discount_percent, :sale_price,
                       :original_price, :on_sale?
 
 

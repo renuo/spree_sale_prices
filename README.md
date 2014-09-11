@@ -8,20 +8,15 @@ sales, have a historical record of sale prices and put sales on hold.
 Requirements
 ------------
 
-This Gem has only been tested with Spree 1.0.0 and Ruby 1.9.3. It might work with other version of Spree but I'm not
-sure. It should work with Ruby 1.9.2 but I haven't verified. It does not support Ruby versions earlier than 1.9 for sure.
-If you test against other version of Spree or Ruby I'd love to hear about the results :)
+This Gem has been tested with Spree 2.3-stable and Ruby 2.1.2. 
+It does not support Ruby versions earlier than 1.9 for sure.
 
 Installing
 ----------
 
 In your Gemfile add the following for the latest released version:
 
-    gem 'spree_sale_pricing'
-
-_OR_ to work from master:
-
-    gem 'spree_sale_pricing', :git => 'git://github.com/jpstokes/spree-sale-pricing.git'
+    gem 'spree_sale_pricing', github: 'renuo/spree-sale-pricing', branch: '2.1-stable'
 
 Install the Gem:
 
@@ -74,6 +69,8 @@ the master variant and leave the other variants untouched.
 **sale_price**                                        Returns the sale price if currently on sale, nil if not
 
 **original_price**                                    Always returns the original price
+
+**discount_percent**                                  Return the percentage of discount
 
 **on_sale?**                                          Return a boolean indication if it is currently on sale (enabled is set to true and we are currently within the active date range)
 

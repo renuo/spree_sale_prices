@@ -10,10 +10,10 @@ class CreateSalePrices < ActiveRecord::Migration
     end
 
     # Getting active sale prices for a price
-    add_index :spree_sale_prices, [:price_id, :start_at, :end_at, :enabled], :name => "index_active_sale_prices_for_price"
+    add_index :spree_sale_prices, [:price_id, :start_at, :end_at, :enabled], name: "index_active_sale_prices_for_price"
     # Getting all active sale prices for all prices
-    add_index :spree_sale_prices, [:start_at, :end_at, :enabled], :name => "index_active_sale_prices_for_all_variants"
+    add_index :spree_sale_prices, [:start_at, :end_at, :enabled], name: "index_active_sale_prices_for_all_variants"
     # Getting all sale prices for a price
-    add_index :spree_sale_prices, :price_id, :name => "index_sale_prices_for_price"
+    add_index :spree_sale_prices, :price_id, name: "index_sale_prices_for_price"
   end
 end
