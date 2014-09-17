@@ -14,25 +14,30 @@ Spree::Product.class_eval do
   # TODO also accept a class reference for calculator type instead of only a string
   def put_on_sale value, params={}
     all_variants = params[:all_variants] || true
-
     run_on_variants(all_variants) { |v| v.put_on_sale(value, params) }
+    self.touch
   end
+
   alias :create_sale :put_on_sale
 
   def enable_sale(all_variants = true)
     run_on_variants(all_variants) { |v| v.enable_sale }
+    self.touch
   end
 
   def disable_sale(all_variants = true)
     run_on_variants(all_variants) { |v| v.disable_sale }
+    self.touch
   end
 
   def start_sale(end_time = nil, all_variants = true)
     run_on_variants(all_variants) { |v| v.start_sale(end_time) }
+    self.touch
   end
 
   def stop_sale(all_variants = true)
     run_on_variants(all_variants) { |v| v.stop_sale }
+    self.touch
   end
 
   private
