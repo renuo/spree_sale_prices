@@ -8,7 +8,7 @@ sales, have a historical record of sale prices and put sales on hold.
 Requirements
 ------------
 
-This Gem has been tested with Spree 2.3-stable and Ruby 2.1.2. 
+This Gem has been tested with Spree 2.4-stable and Ruby 2.2.1. 
 It does not support Ruby versions earlier than 1.9 for sure.
 
 Installing
@@ -16,7 +16,7 @@ Installing
 
 In your Gemfile add the following for the latest released version:
 
-    gem 'spree_sale_pricing', github: 'renuo/spree-sale-pricing', branch: '2.1-stable'
+    gem 'spree_sale_pricing', github: 'renuo/spree-sale-pricing', branch: '2.4-stable'
 
 Install the Gem:
 
@@ -33,11 +33,7 @@ Run database migrations in your app:
 Usage
 -----
 
-At the moment there is only a Ruby interface because I haven't had time to make an admin interface yet. I hope to be able
-to get to that soon.
-
-Simple example assuming you have a product in your database with the price of $20 and you want to put it on sale
-immediately for $10:
+The following example is assuming that you have a product in your database with the price of $20 and you want to put it on sale immediately for $10:
 
     product = Spree::Product.first
 
@@ -50,7 +46,7 @@ immediately for $10:
     puts product.original_price.to_f     # => 20.0
     puts product.on_sale?                # => true
 
-By default it uses the supplied Spree::Calculator::DollarAmountSalePriceCalculator which essentially just returns the
+By default it uses the supplied Spree::Calculator::FixedAmountSalePriceCalculator which essentially just returns the
 value you give it as the sale price.
 
 You can also give a certain percentage off by specifying that you want to use Spree::Calculator::PercentOffSalePriceCalculator.
@@ -101,14 +97,14 @@ variants on sale or just particular variants. See the explanation of put\_on\_sa
 Options for put\_on\_sale (create_sale)
 ---------------------------------------
 
-    put_on_sale(value, calculator_type = "Spree::Calculator::DollarAmountSalePriceCalculator", all_variants = true, start_at = Time.now, end_at = nil, enabled = true)
+    put_on_sale(value, calculator_type = "Spree::Calculator::FixedAmountSalePriceCalculator", all_variants = true, start_at = Time.now, end_at = nil, enabled = true)
 
 **value**           (_float_)
 
-This is either the sale price that you want to sell the product for (if using the default DollarAmountSalePriceCalculator)
+This is either the sale price that you want to sell the product for (if using the default FixedAmountSalePriceCalculator)
 or the float representation of the percentage off of the original price (between 0 and 1)
 
-**calculator_type** (_string_)    - Default: **"Spree::Calculator::DollarAmountSalePriceCalculator"**
+**calculator_type** (_string_)    - Default: **"Spree::Calculator::FixedAmountSalePriceCalculator"**
 
 Specify which calculator to use for determining the sale price. The default calculator will take the value as is and use it
 as the sale price. You can also pass in another calculator value to determine the sale price differently, such as the

@@ -11,7 +11,7 @@ Spree::Price.class_eval do
         start_at: params.fetch(:start_at, Time.now),
         end_at: params.fetch(:end_at, nil),
         enabled: params.fetch(:enabled, true),
-        calculator: params.fetch(:calculator_type, Spree::Calculator::DollarAmountSalePriceCalculator.new)
+        calculator: params.fetch(:calculator_type, Spree::Calculator::FixedAmountSalePriceCalculator.new)
     }
     return sale_prices.new(sale_price_params)
   end
