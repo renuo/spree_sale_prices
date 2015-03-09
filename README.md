@@ -52,7 +52,7 @@ value you give it as the sale price.
 You can also give a certain percentage off by specifying that you want to use Spree::Calculator::PercentOffSalePriceCalculator.
 Note that the percentage is given as a float between 0 and 1, not the integer amount from 0 to 100.
 
-    product.put_on_sale 0.2, "Spree::Calculator::PercentOffSalePriceCalculator"
+    product.put_on_sale 0.2, { calculator_type: Spree::Calculator::PercentOffSalePriceCalculator.new }
     puts product.price.to_f              # => 16.0
 
 This extension gives you all of the below methods on both your Products and Variants. If accessed on the Product when reading values,
@@ -97,7 +97,7 @@ variants on sale or just particular variants. See the explanation of put\_on\_sa
 Options for put\_on\_sale (create_sale)
 ---------------------------------------
 
-    put_on_sale(value, calculator_type = "Spree::Calculator::FixedAmountSalePriceCalculator", all_variants = true, start_at = Time.now, end_at = nil, enabled = true)
+    put_on_sale(value, { calculator_type: Spree::Calculator::PercentOffSalePriceCalculator.new, all_variants: true, start_at: Time.now, end_at: nil, enabled: true })
 
 **value**           (_float_)
 
