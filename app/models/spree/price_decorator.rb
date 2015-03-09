@@ -19,30 +19,31 @@ Spree::Price.class_eval do
   # TODO make update_sale method
 
   def active_sale
-    on_sale? ? first_sale(sale_prices.active) : nil
+    first_sale(sale_prices.active) if on_sale?
   end
   alias :current_sale :active_sale
 
   def next_active_sale
-    sale_prices.present? ? first_sale(sale_prices) : nil
+    first_sale(sale_prices) if sale_prices.present?
   end
   alias :next_current_sale :next_active_sale
 
   def sale_price
-    on_sale? ? active_sale.price : nil
+    active_sale.price if on_sale?
   end
   
   def sale_price=(value)
-    on_sale? ? active_sale.update_attribute(:value, value) : put_on_sale(value)
+    if on_sale?
+      active_sale.update_attribute(:value, value)
+    else
+      put_on_sale(value)
+    end
   end
 
   def discount_percent
     return 0.0 unless original_price > 0
     return 0.0 unless on_sale?
     (1 - (sale_price / original_price)) * 100
-  end
-  def discount_percent
-    on_sale? ? (1 - (sale_price / original_price)) * 100 : 0.0
   end
 
   def on_sale?
@@ -74,28 +75,23 @@ Spree::Price.class_eval do
   end
 
   def enable_sale
-    return nil unless next_active_sale.present?
-    next_active_sale.enable
+    next_active_sale.enable if next_active_sale.present?
   end
 
   def disable_sale
-    return nil unless active_sale.present?
-    active_sale.disable
+    active_sale.disable if active_sale.present?
   end
 
   def start_sale(end_time = nil)
-    return nil unless next_active_sale.present?
-    next_active_sale.start(end_time)
+    next_active_sale.start(end_time) if next_active_sale.present?
   end
 
   def stop_sale
-    return nil unless active_sale.present?
-    active_sale.stop
+    active_sale.stop if active_sale.present?
   end
   
-  private 
-  
-  def first_sale(scope)
-    scope.order("created_at DESC").first
-  end
+  private
+    def first_sale(scope)
+      scope.order("created_at DESC").first
+    end
 end
