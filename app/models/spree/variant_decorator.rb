@@ -55,12 +55,11 @@ Spree::Variant.class_eval do
   end
   
   private
-   
-  def run_on_prices(all_currencies, &block)
-    if all_currencies && prices.present?
-      prices.each { |p| block.call p }
-    else
-      block.call default_price  
+    def run_on_prices(all_currencies, &block)
+      if all_currencies && prices.present?
+        prices.each { |p| block.call p }
+      else
+        block.call default_price
+      end
     end
-  end
 end

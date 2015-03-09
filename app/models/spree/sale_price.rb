@@ -1,14 +1,13 @@
 module Spree
   class SalePrice < ActiveRecord::Base
 
-    belongs_to :price, :class_name => "Spree::Price"
+    belongs_to :price, class_name: "Spree::Price"
     has_one :variant, through: :price
-
-    has_one :calculator, :class_name => "Spree::Calculator", :as => :calculable, :dependent => :destroy
+    has_one :calculator, class_name: "Spree::Calculator", as: :calculable, dependent: :destroy
 
     accepts_nested_attributes_for :calculator
 
-    validates :calculator, :presence => true
+    validates :calculator, presence: true
 
     scope :active, -> { where(enabled: true).where('(start_at <= ? OR start_at IS NULL) AND (end_at >= ? OR end_at IS NULL)', Time.now, Time.now) }
 
@@ -51,9 +50,9 @@ module Spree
     end
 
     protected
+      def touch_product
+        self.variant.product.touch
+      end
 
-    def touch_product
-      self.variant.product.touch
-    end
   end
 end
