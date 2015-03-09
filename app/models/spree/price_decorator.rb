@@ -1,5 +1,4 @@
 Spree::Price.class_eval do
-
   has_many :sale_prices
   
   def put_on_sale value, params={}
@@ -7,13 +6,14 @@ Spree::Price.class_eval do
   end
 
   def new_sale value, params={}
-    calculator_type = params[:calculator_type] || Spree::Calculator::DollarAmountSalePriceCalculator.new
-    start_at = params[:start_at] || Time.now
-    end_at = params[:end_at] || nil
-    enabled = params[:enabled] || true
-
-    sale_price = sale_prices.new({ value: value, start_at: start_at, end_at: end_at, enabled: enabled, calculator: calculator_type })
-    sale_price
+    sale_price_params = {
+        value: value,
+        start_at: params.fetch(:start_at, Time.now),
+        end_at: params.fetch(:end_at, nil),
+        enabled: params.fetch(:enabled, true),
+        calculator: params.fetch(:calculator_type, Spree::Calculator::DollarAmountSalePriceCalculator.new)
+    }
+    return sale_prices.new(sale_price_params)
   end
   
   # TODO make update_sale method
