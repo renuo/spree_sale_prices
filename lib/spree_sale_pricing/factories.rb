@@ -5,11 +5,26 @@ FactoryGirl.define do
   # require 'spree_sale_pricing/factories'
 
   factory :sale_price, class: Spree::SalePrice do
-    value { BigDecimal.new(15.99, 4) }
+    value { BigDecimal.new(rand(10..1000), 6) }
     start_at { Time.now }
     end_at nil
     enabled true
     calculator { Spree::Calculator::FixedAmountSalePriceCalculator.new }
+  end
+
+  factory :international_price, parent: :price do
+    amount { BigDecimal.new(rand(10..1000), 6) }
+    currency { Faker::Currency.code }
+  end
+
+  factory :multi_price_variant, parent: :variant do
+    transient do
+      prices_count 3
+    end
+
+    after(:create) do |variant, evaluator|
+      create_list(:international_price, evaluator.prices_count, variant: variant)
+    end
   end
 
 end
