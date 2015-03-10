@@ -18,11 +18,22 @@ describe Spree::Price do
     })
   end
 
-  it 'can put a price (and the attached product) on sale' do
+  it 'can put a price on a fixed sale' do
     price = create(:price)
     price.put_on_sale 15.95
+
     expect(price.on_sale?).to be true
     expect(price.price).to eql BigDecimal.new(15.95, 4)
+    expect(price.original_price).to eql(19.99)
+  end
+
+  it 'can put a price on a percent-off sale' do
+    price = create(:price)
+    price.put_on_sale 0.2, { calculator_type: Spree::Calculator::PercentOffSalePriceCalculator.new }
+
+    expect(price.on_sale?).to be true
+    expect(price.price).to be_within(0.01).of(15.99)
+    expect(price.original_price).to eql(19.99)
   end
 
   context 'calculating discount percentage' do
