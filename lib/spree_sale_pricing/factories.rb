@@ -5,7 +5,7 @@ FactoryGirl.define do
   # require 'spree_sale_pricing/factories'
 
   factory :sale_price, class: Spree::SalePrice do
-    value { BigDecimal.new(rand(10..1000), 6) }
+    value 10.90
     start_at { Time.now }
     end_at nil
     enabled true
@@ -13,7 +13,6 @@ FactoryGirl.define do
   end
 
   factory :international_price, parent: :price do
-    amount { BigDecimal.new(rand(10..1000), 6) }
     currency { Faker::Currency.code }
   end
 
