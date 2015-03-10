@@ -21,9 +21,27 @@ describe Spree::Price do
   it 'can put a price (and the attached product) on sale' do
     price = create(:price)
     price.put_on_sale 15.95
-
     expect(price.on_sale?).to be true
     expect(price.price).to eql BigDecimal.new(15.95, 4)
+  end
+
+  context 'calculating discount percentage' do
+    it 'returns 0 if there\'s no original price' do
+      price = create(:price)
+      price.amount = BigDecimal(0)
+      expect(price.discount_percent.to_f).to eql 0.0
+    end
+
+    it 'returns 0 if it\'s not on sale' do
+      price = create(:price)
+      expect(price.discount_percent.to_f).to eql 0.0
+    end
+
+    it 'returns correct percentage value' do
+      price = create(:price)
+      price.put_on_sale(15.00)
+      expect(price.discount_percent.to_f).to be_within(0.1).of(25)
+    end
   end
 
 end
