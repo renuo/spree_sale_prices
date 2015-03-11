@@ -1,8 +1,8 @@
-tr data-hook="products_row" id=spree_dom_id(sale_price) class="spree-product-sale-price"
+tr data-hook="products_row" id = spree_dom_id(sale_price) class = "spree-product-sale-price"
   td.align-center = active_for_sale_price(product, sale_price) ? 'Yes' : ''
   td = sale_price.display_price.to_html
   td = (l sale_price.start_at ) if sale_price.start_at
   td = (l sale_price.end_at) if sale_price.end_at
   td.align-center = sale_price.enabled
   td.actions
-    = link_to_delete sale_price, {:url => admin_product_sale_price_url(product, sale_price.id), :no_text => true}
+    = link_to_delete sale_price, {url: admin_product_sale_price_url(product, sale_price.id), no_text: true}
