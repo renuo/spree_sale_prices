@@ -1,0 +1,14 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+de:
+  sale_price: "Aktionspreis"
+  original_price: "Originalpreis (Standard Währung)"
+  product_sale_prices: "Aktionspreise des Produktes"
+  add_product_sale_prices: "Aktionspreise hinzufügen"
+  sale_price_amount: 'Wert'
+  sale_price_active: 'Aktiv'
+  sale_price_currency: "Währung"
+  sale_price_start_at: "Startdatum"
+  sale_price_end_at: "Enddatum"
+  sale_price_enabled: "Aktiviert"
