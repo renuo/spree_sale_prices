@@ -55,7 +55,8 @@ Spree::Variant.class_eval do
   end
   
   private
-    def run_on_prices(currencies, &block)
+    # runs on all currencies or on the ones you've specified
+    def run_on_prices(currencies = [], &block)
       if currencies.any?
         prices_with_currencies = prices.select { |p| currencies.include?(p.currency) }
         prices_with_currencies.each { |p| block.call p }
