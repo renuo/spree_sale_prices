@@ -23,7 +23,7 @@ describe Spree::Variant do
     end
   end
 
-  it 'changes the price for a specific currency' do
+  it 'changes the price for specific prices/currencies' do
     variant = create(:multi_price_variant, prices_count: 5)
     some_prices = variant.prices.sample(3)
     some_prices.delete(variant.price)
