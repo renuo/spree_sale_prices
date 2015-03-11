@@ -2,12 +2,13 @@ module Spree
   class SalePrice < ActiveRecord::Base
 
     belongs_to :price, class_name: "Spree::Price"
+    delegate_belongs_to :price, :currency
+
     has_one :variant, through: :price
+
     has_one :calculator, class_name: "Spree::Calculator", as: :calculable, dependent: :destroy
-
-    accepts_nested_attributes_for :calculator
-
     validates :calculator, presence: true
+    accepts_nested_attributes_for :calculator
 
     scope :active, -> { where(enabled: true).where('(start_at <= ? OR start_at IS NULL) AND (end_at >= ? OR end_at IS NULL)', Time.now, Time.now) }
 
@@ -21,7 +22,12 @@ module Spree
       calculator.class.to_s if calculator
     end
 
+    def amount
+      calculator.compute self
+    end
+
     def price
+      warn '[DEPRECATION] `price` is deprecated.  Please use `amount` instead. (%s)' % Kernel.caller.first
       calculator.compute self
     end
 
