@@ -18,7 +18,6 @@ module Spree
       def destroy
         @sale_price = Spree::SalePrice.find(params[:id])
         @sale_price.destroy
-
         respond_with(@sale_price)
       end
 
@@ -33,6 +32,7 @@ module Spree
         params.require(:sale_price).permit(
             :id,
             :value,
+            :currency,
             :start_at,
             :end_at,
             :enabled
