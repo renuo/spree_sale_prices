@@ -10,8 +10,6 @@ Spree::Product.class_eval do
                       :sale_price_in, :on_sale_in?, :original_price_in, :discount_percent_in, :discount_percent, :sale_price,
                       :original_price, :on_sale?
 
-
-
   # TODO also accept a class reference for calculator type instead of only a string
   def put_on_sale(value, params = {})
     all_variants = params[:all_variants] || true
