@@ -5,7 +5,10 @@ Spree::Variant.class_eval do
   delegate_belongs_to :default_price, :sale_price, :original_price, :on_sale?, :discount_percent
 
   def put_on_sale(value, params = {})
-    currencies = params[:currencies] || []
+    currencies = params.fetch(:currencies, [])
+    if params[:currency].present?
+      currencies << params[:currency] unless currencies.include? params[:currency]
+    end
     run_on_prices(currencies) { |p| p.put_on_sale value, params }
   end
   alias :create_sale :put_on_sale
@@ -55,9 +58,9 @@ Spree::Variant.class_eval do
   end
   
   private
-    # runs on all currencies or on the ones you've specified
-    def run_on_prices(currencies = [], &block)
-      if currencies.any?
+    # runs on all prices or on the ones with the currencies you've specified
+    def run_on_prices(currencies, &block)
+      if currencies.present? && currencies.any?
         prices_with_currencies = prices.select { |p| currencies.include?(p.currency) }
         prices_with_currencies.each { |p| block.call p }
       else
