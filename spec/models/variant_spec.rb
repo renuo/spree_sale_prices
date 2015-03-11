@@ -26,11 +26,8 @@ describe Spree::Variant do
   it 'changes the price for specific prices/currencies' do
     variant = create(:multi_price_variant, prices_count: 5)
     some_prices = variant.prices.sample(3)
-    some_prices.delete(variant.price)
     variant.put_on_sale 10.95, { currencies: some_prices.map(&:currency) }
 
-    # expect standard price to stay
-    expect(variant.price).to eql BigDecimal.new(19.99, 4)
     expect(variant.original_price).to eql BigDecimal.new(19.99, 4)
 
     # some specific prices (by currency) should have changed
