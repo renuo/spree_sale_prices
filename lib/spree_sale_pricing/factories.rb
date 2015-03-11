@@ -10,6 +10,7 @@ FactoryGirl.define do
     end_at nil
     enabled false
     calculator { Spree::Calculator::FixedAmountSalePriceCalculator.new }
+    association :price, factory: :international_price
 
     factory :active_sale_price do
       start_at { Time.now }
