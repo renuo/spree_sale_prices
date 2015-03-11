@@ -1,11 +1,11 @@
 Spree::Price.class_eval do
   has_many :sale_prices
   
-  def put_on_sale value, params={}
+  def put_on_sale(value, params = {})
     new_sale(value, params).save
   end
 
-  def new_sale value, params={}
+  def new_sale(value, params = {})
     sale_price_params = {
         value: value,
         start_at: params.fetch(:start_at, Time.now),
