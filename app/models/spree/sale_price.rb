@@ -22,12 +22,7 @@ module Spree
       calculator.class.to_s if calculator
     end
 
-    def amount
-      calculator.compute self
-    end
-
-    def price
-      warn '[DEPRECATION] `price` is deprecated.  Please use `amount` instead. (%s)' % Kernel.caller.first
+    def calculated_price
       calculator.compute self
     end
 
@@ -52,7 +47,7 @@ module Spree
 
     # Convenience method for displaying the price of a given sale_price in the table
     def display_price
-      Spree::Money.new(value, {currency: Spree::Config[:currency]})
+      Spree::Money.new(value || 0, { currency: price.currency })
     end
 
     protected

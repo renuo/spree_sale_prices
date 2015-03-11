@@ -31,10 +31,8 @@ describe Spree::SalePrice do
     money = sale_price.display_price
 
     expect(money).to be_a Spree::Money
-    expect(money.money.amount).to eq(sale_price.price)
-
-    # TODO: activate after price is delegates by sale_price
-    #expect(money.money.currency).to eq(sale_price.currency)
+    expect(money.money.amount).to eq(sale_price.calculated_price)
+    expect(money.money.currency).to eq(sale_price.currency)
   end
 
 end
