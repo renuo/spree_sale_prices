@@ -34,6 +34,10 @@ module Spree
       update_attribute(:enabled, false)
     end
 
+    def active?
+      Spree::SalePrice.active.include? self
+    end
+
     def start(end_time = nil)
       end_time = nil if end_time.present? && end_time <= Time.now # if end_time is not in the future then make it nil (no end)
       attr = { end_at: end_time, enabled: true }
