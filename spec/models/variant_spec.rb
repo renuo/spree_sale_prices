@@ -50,4 +50,18 @@ describe Spree::Variant do
     end
   end
 
+  it 'can set the original price to something different without changing the sale price' do
+    variant = create(:multi_price_variant, prices_count: 5)
+    variant.put_on_sale(10.95)
+    variant.prices.each do |p|
+      p.original_price = 9.55
+    end
+
+    variant.prices.each do |p|
+      expect(p.price).to eq BigDecimal.new(10.95, 4)
+      expect(p.sale_price).to eq BigDecimal.new(10.95, 4)
+      expect(p.original_price).to eq BigDecimal.new(9.55, 4)
+    end
+  end
+
 end
