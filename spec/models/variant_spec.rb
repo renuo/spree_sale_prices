@@ -54,13 +54,29 @@ describe Spree::Variant do
     variant = create(:multi_price_variant, prices_count: 5)
     variant.put_on_sale(10.95)
     variant.prices.each do |p|
-      p.original_price = 9.55
+      p.original_price = 12.90
     end
 
     variant.prices.each do |p|
+      expect(p.on_sale?).to be true
       expect(p.price).to eq BigDecimal.new(10.95, 4)
       expect(p.sale_price).to eq BigDecimal.new(10.95, 4)
-      expect(p.original_price).to eq BigDecimal.new(9.55, 4)
+      expect(p.original_price).to eq BigDecimal.new(12.90, 4)
+    end
+  end
+
+  it 'is not on sale anymore if the original price is lower than the sale price' do
+    variant = create(:multi_price_variant, prices_count: 5)
+    variant.put_on_sale(10.95)
+    variant.prices.each do |p|
+      p.original_price = 9.90
+    end
+
+    variant.prices.each do |p|
+      expect(p.on_sale?).to be false
+      expect(p.price).to eq BigDecimal.new(9.90, 4)
+      expect(p.sale_price).to eq nil
+      expect(p.original_price).to eq BigDecimal.new(9.90, 4)
     end
   end
 
