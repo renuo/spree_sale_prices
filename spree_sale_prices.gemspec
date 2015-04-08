@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.name        = 'spree_sale_prices'
   s.version     = '1.0.0'
   s.summary     = 'Adds sale pricing functionality to Spree Commerce'
-  s.description = 'Adds sale pricing functionality to Spree Commerce'
+  s.description = 'Adds sale pricing functionality to Spree Commerce. It enables timed sale planning for different currencies.'
   s.required_ruby_version = '>= 1.9.3'
 
   s.author            = 'Renuo GmbH, Jonathan Dean'
