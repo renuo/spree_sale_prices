@@ -152,7 +152,7 @@ Tests are in progress, so there aren't any yet. I know, TDD, blah blah blah.
 Be sure to bundle your dependencies and then create a dummy test app for the specs to run against.
 
     $ bundle
-    $ bundle exec rake test app
-    $ bundle exec rspec spec
+    $ bundle exec rake test_app
+    $ bundle exec rspec
 
-Copyright (c) 2012 Jonathan Dean, released under the New BSD License
+Copyright (c) 2012 Jonathan Dean, 2015 Renuo GmbH released under the New BSD License
