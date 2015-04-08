@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.author            = 'Renuo GmbH, Jonathan Dean'
   s.email             = 'info@renuo.ch'
-  s.homepage          = 'https://www.renuo.ch'
+  s.homepage          = 'https://github.com/renuo/spree_sale_prices'
   s.license           = 'BSD-3'
 
   #s.files       = `git ls-files`.split("\n")
@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'spree_core', '~> 2.4.5'
+  s.add_dependency 'spree_core', '~> 2.4', '>= 2.4.5'
 
   s.add_development_dependency 'rspec-rails',  '~> 3.1'
   s.add_development_dependency 'capybara',  '~> 2.4'
