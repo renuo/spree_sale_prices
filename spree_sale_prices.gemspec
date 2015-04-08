@@ -10,6 +10,7 @@ Gem::Specification.new do |s|
   s.author            = 'Renuo GmbH, Jonathan Dean'
   s.email             = 'info@renuo.ch'
   s.homepage          = 'https://www.renuo.ch'
+  s.license           = 'BSD-3'
 
   #s.files       = `git ls-files`.split("\n")
   #s.test_files  = `git ls-files -- {test,spec,features}/*`.split("\n")
@@ -18,14 +19,10 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'spree_core', '~> 2.4.5'
 
-  s.add_development_dependency 'coffee-rails'
-  s.add_development_dependency 'capybara'
-  s.add_development_dependency 'database_cleaner'
-  s.add_development_dependency 'factory_girl', '~> 4.5'
-  s.add_development_dependency 'ffaker'
   s.add_development_dependency 'rspec-rails',  '~> 3.1'
-  s.add_development_dependency 'sass-rails', '~> 4.0.2'
-  s.add_development_dependency 'selenium-webdriver'
-  s.add_development_dependency 'simplecov'
-  s.add_development_dependency 'sqlite3'
+  s.add_development_dependency 'capybara',  '~> 2.4'
+  s.add_development_dependency 'database_cleaner',  '~> 1.4'
+  s.add_development_dependency 'factory_girl', '~> 4.5'
+  s.add_development_dependency 'simplecov',  '~> 0.9'
+  s.add_development_dependency 'sqlite3',  '~> 1.3'
 end
