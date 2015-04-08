@@ -1,7 +1,7 @@
 # encoding: UTF-8
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
-  s.name        = 'spree_sale_pricing'
+  s.name        = 'spree-sale_price'
   s.version     = '2.4.5.1'
   s.summary     = 'Adds sale pricing functionality to Spree Commerce'
   s.description = 'Adds sale pricing functionality to Spree Commerce'
