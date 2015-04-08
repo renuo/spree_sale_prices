@@ -1,5 +1,5 @@
-Spree Sale Pricing
-==================
+Spree Sale Prices
+=================
 
 A Spree Commerce extension (Rails Engine) that lets you set sale prices on products, either by a fixed sale price or a
 percentage off of the original price. Sale prices have a start date, end date and enabled flag to allow you to schedule
@@ -16,7 +16,7 @@ Installing
 
 In your Gemfile add the following for the latest released version:
 
-    gem 'spree_sale_pricing', github: 'renuo/spree-sale-pricing', branch: '2.4-stable'
+    gem 'spree_sale_prices', github: 'renuo/spree-sale-prices', branch: '2.4-stable'
 
 Install the Gem:
 

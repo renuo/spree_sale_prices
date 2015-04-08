@@ -1,6 +1,6 @@
-module SpreeSalePricing
+module SpreeSalePrices
   class Engine < Rails::Engine
-    engine_name 'spree_sale_pricing'
+    engine_name 'spree_sale_prices'
 
     config.autoload_paths += %W(#{config.root}/lib)
 
