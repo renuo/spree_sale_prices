@@ -155,4 +155,9 @@ Be sure to bundle your dependencies and then create a dummy test app for the spe
     $ bundle exec rake test_app
     $ bundle exec rspec
 
+Source
+------
+
+This project derives from a fork of [jpstokes/spree-sale-pricing](https://github.com/jpstokes/spree-sale-pricing) and was originally developed by Jonathan Dean.
+
 Copyright (c) 2012 Jonathan Dean, 2015 Renuo GmbH released under the New BSD License
